@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助中心 - 中政集团</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #d4af37;
+            --accent-color: #2c5282;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --gray-color: #6c757d;
+            --border-color: #dee2e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 0;
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 50px;
+        }
+        
+        .company-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .header-bottom {
+            padding: 15px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 主横幅 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* 搜索区域 */
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #c19b2a;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto;
+        }
+        
+        /* 分类网格 */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* 常见问题 */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* 联系支持 */
+        .contact-section {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            margin-top: 60px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .contact-option {
+            text-align: center;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .contact-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-option h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* 页脚 */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="logo-container">
+                    <div class="logo-placeholder">
+                        <!-- 在实际项目中这里应该是img标签 -->
+                        <div style="width: 50px; height: 50px; background: var(--secondary-color); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border-radius: 5px;">中政</div>
+                    </div>
+                    <div class="company-name">中政集团</div>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i> 400-888-8888
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">业务领域</a></li>
+                        <li><a href="#">新闻中心</a></li>
+                        <li><a href="#" class="active">帮助中心</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主横幅 -->
+    <section class="hero">
+        <div class="container">
+            <h1>中政集团帮助中心</h1>
+            <p>在这里您可以找到常见问题的解答、使用指南以及联系我们获取更多支持</p>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="请输入您的问题或关键词...">
+                <button class="search-btn">搜索</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 分类导航 -->
+            <section class="categories-section">
+                <h2 class="section-title">问题分类</h2>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>账户管理</h3>
+                        <p>账户注册、登录、权限设置等问题</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>业务办理</h3>
+                        <p>业务申请、流程指导、材料准备等</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>安全与隐私</h3>
+                        <p>数据安全、隐私保护、账户安全等</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>财务与支付</h3>
+                        <p>费用结算、发票管理、支付问题等</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>平台使用</h3>
+                        <p>系统操作、功能使用、技术问题等</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>其他问题</h3>
+                        <p>未归类的问题请点击此处</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 常见问题 -->
+            <section class="faq-section">
+                <h2 class="section-title">常见问题</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>如何注册中政集团账户？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>注册中政集团账户非常简单：访问我们的官方网站，点击右上角的"注册"按钮，按照页面提示填写您的个人信息，包括姓名、手机号码、邮箱地址等，设置登录密码后完成验证即可成功注册。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>忘记密码怎么办？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>如果您忘记了密码，可以在登录页面点击"忘记密码"链接，然后按照提示输入您的注册手机号或邮箱地址，系统将向您发送验证码，验证成功后即可重置密码。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>如何查询业务办理进度？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>登录您的账户后，进入"我的业务"页面，您可以查看所有已提交业务的当前状态和办理进度。如有特殊情况，系统会通过短信或站内信通知您。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>发票如何申请和获取？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>在完成支付后，您可以在"财务管理"页面申请开具发票。填写正确的发票信息和邮寄地址，我们将在3-5个工作日内处理您的申请并通过快递寄送纸质发票，或发送电子发票至您的邮箱。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>如何联系客服？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>您可以通过以下方式联系我们的客服团队：拨打客服热线400-888-8888（工作日9:00-18:00）、发送邮件至support@zhongzheng.com、或通过在线客服系统与我们取得联系。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 联系支持 -->
+            <section class="contact-section">
+                <h2 class="section-title">联系支持</h2>
+                <p style="text-align: center; margin-bottom: 20px;">如果您在帮助中心没有找到答案，我们的支持团队随时为您提供帮助</p>
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h4>电话支持</h4>
+                        <p>400-888-8888</p>
+                        <p>工作日 9:00-18:00</p>
+                    </div>
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>邮件支持</h4>
+                        <p>support@zhongzheng.com</p>
+                        <p>24小时内回复</p>
+                    </div>
+                    <div class="contact-option">
+                        <div class="contact-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4>在线客服</h4>
+                        <p>实时在线沟通</p>
+                        <p>工作日 9:00-18:00</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">集团简介</a></li>
+                        <li><a href="#">发展历程</a></li>
+                        <li><a href="#">企业文化</a></li>
+                        <li><a href="#">荣誉资质</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>业务领域</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">金融服务</a></li>
+                        <li><a href="#">产业投资</a></li>
+                        <li><a href="#">资产管理</a></li>
+                        <li><a href="#">国际业务</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>帮助中心</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">使用指南</a></li>
+                        <li><a href="#">服务协议</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">总部地址</a></li>
+                        <li><a href="#">分支机构</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">在线留言</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>版权所有 © 2023 中政集团 保留所有权利 | 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 常见问题折叠功能
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+
+        // 搜索功能（基础前端实现）
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-box').value.trim();
+            if (searchTerm) {
+                alert(`正在搜索: ${searchTerm}\n\n在实际应用中，这里会显示与"${searchTerm}"相关的搜索结果。`);
+            } else {
+                alert('请输入搜索关键词');
+            }
+        });
+
+        // 分类卡片点击事件
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const categoryName = this.querySelector('h3').textContent;
+                alert(`您点击了"${categoryName}"分类\n\n在实际应用中，这里会跳转到该分类的详细页面。`);
+            });
+        });
+    </script>
+</body>
+</html>
