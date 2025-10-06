@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>帮助中心 - 中政集团</title>
+    <title>文档中心 - 中政集团</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,6 +14,7 @@
             --dark-color: #333;
             --gray-color: #6c757d;
             --border-color: #dee2e6;
+            --sidebar-width: 280px;
         }
         
         * {
@@ -31,7 +32,7 @@
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -94,6 +95,11 @@
             color: var(--primary-color);
         }
         
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
         /* 主横幅 */
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
@@ -149,140 +155,268 @@
         
         /* 主要内容区域 */
         .main-content {
-            padding: 60px 0;
+            display: flex;
+            padding: 40px 0;
+            gap: 30px;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .sidebar-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 12px;
+        }
+        
+        .category-list a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-color);
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+        
+        .category-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        .category-list i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .category-list .active a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* 文档内容区域 */
+        .content-area {
+            flex: 1;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
         
         .section-title {
-            text-align: center;
-            margin-bottom: 40px;
             color: var(--primary-color);
             position: relative;
+            padding-bottom: 10px;
         }
         
         .section-title:after {
             content: '';
-            display: block;
-            width: 80px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
             height: 3px;
             background: var(--secondary-color);
-            margin: 10px auto;
         }
         
-        /* 分类网格 */
-        .category-grid {
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .filter-select {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: white;
+            color: var(--dark-color);
+        }
+        
+        /* 文档网格 */
+        .documents-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
         
-        .category-card {
+        .document-card {
             background: white;
             border-radius: 8px;
-            padding: 30px 25px;
-            text-align: center;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
         
-        .category-card:hover {
+        .document-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
-        .category-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .document-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .category-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
+        .document-icon {
+            font-size: 1.5rem;
         }
         
-        /* 常见问题 */
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-        
-        .faq-question {
+        .document-body {
             padding: 20px;
+        }
+        
+        .document-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .document-meta {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin-bottom: 15px;
+        }
+        
+        .document-description {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
             cursor: pointer;
-            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
         }
         
-        .faq-question i {
-            transition: transform 0.3s;
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
         }
         
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s, padding 0.3s;
+        .btn-primary:hover {
+            background: var(--accent-color);
         }
         
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 500px;
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
         }
         
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
         }
         
-        /* 联系支持 */
-        .contact-section {
+        /* 热门文档 */
+        .popular-documents {
+            margin-top: 50px;
+        }
+        
+        .documents-list {
             background: white;
             border-radius: 8px;
-            padding: 40px;
-            margin-top: 60px;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        .contact-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        .document-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
         }
         
-        .contact-option {
+        .document-row:last-child {
+            border-bottom: none;
+        }
+        
+        .document-row:hover {
+            background: #f8f9fa;
+        }
+        
+        .document-row-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            width: 30px;
             text-align: center;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: all 0.3s;
         }
         
-        .contact-option:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
+        .document-row-content {
+            flex: 1;
         }
         
-        .contact-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .document-row-title {
+            font-weight: 500;
+            margin-bottom: 5px;
         }
         
-        .contact-option h4 {
-            margin-bottom: 10px;
-            color: var(--primary-color);
+        .document-row-meta {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+        
+        .document-row-actions {
+            display: flex;
+            gap: 10px;
         }
         
         /* 页脚 */
@@ -343,6 +477,20 @@
         }
         
         /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .documents-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -357,12 +505,24 @@
                 font-size: 0.9rem;
             }
             
-            .category-grid {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .documents-grid {
                 grid-template-columns: 1fr;
             }
             
-            .contact-section {
-                padding: 25px;
+            .document-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .document-row-actions {
+                align-self: flex-end;
             }
         }
     </style>
@@ -392,7 +552,8 @@
                         <li><a href="#">关于我们</a></li>
                         <li><a href="#">业务领域</a></li>
                         <li><a href="#">新闻中心</a></li>
-                        <li><a href="#" class="active">帮助中心</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="#" class="active">文档中心</a></li>
                         <li><a href="#">联系我们</a></li>
                     </ul>
                 </nav>
@@ -403,10 +564,10 @@
     <!-- 主横幅 -->
     <section class="hero">
         <div class="container">
-            <h1>中政集团帮助中心</h1>
-            <p>在这里您可以找到常见问题的解答、使用指南以及联系我们获取更多支持</p>
+            <h1>中政集团文档中心</h1>
+            <p>企业文档、政策文件、操作指南和参考资料一站式获取</p>
             <div class="search-container">
-                <input type="text" class="search-box" placeholder="请输入您的问题或关键词...">
+                <input type="text" class="search-box" placeholder="搜索文档、政策、指南...">
                 <button class="search-btn">搜索</button>
             </div>
         </div>
@@ -415,138 +576,302 @@
     <!-- 主要内容 -->
     <main class="main-content">
         <div class="container">
-            <!-- 分类导航 -->
-            <section class="categories-section">
-                <h2 class="section-title">问题分类</h2>
-                <div class="category-grid">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <h3>账户管理</h3>
-                        <p>账户注册、登录、权限设置等问题</p>
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">文档分类</h3>
+                    <ul class="category-list">
+                        <li class="active"><a href="#"><i class="fas fa-folder"></i> 全部文档</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> 政策法规</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> 操作手册</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> 业务报告</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> 人力资源</a></li>
+                        <li><a href="#"><i class="fas fa-cogs"></i> 技术文档</a></li>
+                        <li><a href="#"><i class="fas fa-balance-scale"></i> 合规文件</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> 安全指南</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">最近访问</h3>
+                    <ul class="category-list">
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> 2023年度财务报告</a></li>
+                        <li><a href="#"><i class="fas fa-file-word"></i> 员工手册V3.2</a></li>
+                        <li><a href="#"><i class="fas fa-file-excel"></i> 业务数据统计表</a></li>
+                        <li><a href="#"><i class="fas fa-file-powerpoint"></i> 季度战略规划</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">筛选条件</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">文档类型</label>
+                        <select class="filter-select" style="width: 100%;">
+                            <option>全部类型</option>
+                            <option>PDF文档</option>
+                            <option>Word文档</option>
+                            <option>Excel表格</option>
+                            <option>PPT演示</option>
+                        </select>
                     </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <h3>业务办理</h3>
-                        <p>业务申请、流程指导、材料准备等</p>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">发布日期</label>
+                        <select class="filter-select" style="width: 100%;">
+                            <option>全部时间</option>
+                            <option>最近一周</option>
+                            <option>最近一个月</option>
+                            <option>最近三个月</option>
+                            <option>最近一年</option>
+                        </select>
                     </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>安全与隐私</h3>
-                        <p>数据安全、隐私保护、账户安全等</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <h3>财务与支付</h3>
-                        <p>费用结算、发票管理、支付问题等</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>平台使用</h3>
-                        <p>系统操作、功能使用、技术问题等</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <h3>其他问题</h3>
-                        <p>未归类的问题请点击此处</p>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">部门</label>
+                        <select class="filter-select" style="width: 100%;">
+                            <option>全部部门</option>
+                            <option>行政管理部</option>
+                            <option>财务部</option>
+                            <option>人力资源部</option>
+                            <option>业务发展部</option>
+                            <option>技术研发部</option>
+                        </select>
                     </div>
                 </div>
-            </section>
+            </aside>
 
-            <!-- 常见问题 -->
-            <section class="faq-section">
-                <h2 class="section-title">常见问题</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>如何注册中政集团账户？</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>注册中政集团账户非常简单：访问我们的官方网站，点击右上角的"注册"按钮，按照页面提示填写您的个人信息，包括姓名、手机号码、邮箱地址等，设置登录密码后完成验证即可成功注册。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>忘记密码怎么办？</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>如果您忘记了密码，可以在登录页面点击"忘记密码"链接，然后按照提示输入您的注册手机号或邮箱地址，系统将向您发送验证码，验证成功后即可重置密码。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>如何查询业务办理进度？</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>登录您的账户后，进入"我的业务"页面，您可以查看所有已提交业务的当前状态和办理进度。如有特殊情况，系统会通过短信或站内信通知您。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>发票如何申请和获取？</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>在完成支付后，您可以在"财务管理"页面申请开具发票。填写正确的发票信息和邮寄地址，我们将在3-5个工作日内处理您的申请并通过快递寄送纸质发票，或发送电子发票至您的邮箱。</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>如何联系客服？</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>您可以通过以下方式联系我们的客服团队：拨打客服热线400-888-8888（工作日9:00-18:00）、发送邮件至support@zhongzheng.com、或通过在线客服系统与我们取得联系。</p>
-                        </div>
+            <!-- 文档内容区域 -->
+            <div class="content-area">
+                <div class="section-header">
+                    <h2 class="section-title">全部文档</h2>
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option>最新优先</option>
+                            <option>最旧优先</option>
+                            <option>名称 A-Z</option>
+                            <option>名称 Z-A</option>
+                            <option>最多浏览</option>
+                        </select>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-sync-alt"></i> 刷新
+                        </button>
                     </div>
                 </div>
-            </section>
 
-            <!-- 联系支持 -->
-            <section class="contact-section">
-                <h2 class="section-title">联系支持</h2>
-                <p style="text-align: center; margin-bottom: 20px;">如果您在帮助中心没有找到答案，我们的支持团队随时为您提供帮助</p>
-                <div class="contact-options">
-                    <div class="contact-option">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
+                <!-- 文档网格 -->
+                <div class="documents-grid">
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span>PDF文档</span>
                         </div>
-                        <h4>电话支持</h4>
-                        <p>400-888-8888</p>
-                        <p>工作日 9:00-18:00</p>
+                        <div class="document-body">
+                            <h3 class="document-title">2023年度财务审计报告</h3>
+                            <div class="document-meta">
+                                <span>财务管理部</span>
+                                <span>2023-12-15</span>
+                            </div>
+                            <p class="document-description">包含中政集团2023年度财务状况、审计结果及财务分析，供内部管理人员参考。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="contact-option">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+                    
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-word document-icon"></i>
+                            <span>Word文档</span>
                         </div>
-                        <h4>邮件支持</h4>
-                        <p>support@zhongzheng.com</p>
-                        <p>24小时内回复</p>
+                        <div class="document-body">
+                            <h3 class="document-title">员工手册 V4.0</h3>
+                            <div class="document-meta">
+                                <span>人力资源部</span>
+                                <span>2024-01-10</span>
+                            </div>
+                            <p class="document-description">最新版员工手册，包含公司政策、行为规范、福利待遇及职业发展路径等内容。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="contact-option">
-                        <div class="contact-icon">
-                            <i class="fas fa-comments"></i>
+                    
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-excel document-icon"></i>
+                            <span>Excel表格</span>
                         </div>
-                        <h4>在线客服</h4>
-                        <p>实时在线沟通</p>
-                        <p>工作日 9:00-18:00</p>
+                        <div class="document-body">
+                            <h3 class="document-title">业务数据统计表 Q1 2024</h3>
+                            <div class="document-meta">
+                                <span>业务发展部</span>
+                                <span>2024-04-05</span>
+                            </div>
+                            <p class="document-description">2024年第一季度业务数据汇总与分析，包含各区域销售数据及业绩指标完成情况。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-powerpoint document-icon"></i>
+                            <span>PPT演示</span>
+                        </div>
+                        <div class="document-body">
+                            <h3 class="document-title">2024年战略规划发布会</h3>
+                            <div class="document-meta">
+                                <span>战略规划部</span>
+                                <span>2024-02-20</span>
+                            </div>
+                            <p class="document-description">中政集团2024年战略方向、业务重点及发展目标的详细阐述，供内部会议使用。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-pdf document-icon"></i>
+                            <span>PDF文档</span>
+                        </div>
+                        <div class="document-body">
+                            <h3 class="document-title">信息安全政策与规范</h3>
+                            <div class="document-meta">
+                                <span>信息技术部</span>
+                                <span>2024-03-12</span>
+                            </div>
+                            <p class="document-description">公司信息安全政策、数据保护规范及员工安全操作指南，全员必须遵守。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="document-card">
+                        <div class="document-header">
+                            <i class="fas fa-file-word document-icon"></i>
+                            <span>Word文档</span>
+                        </div>
+                        <div class="document-body">
+                            <h3 class="document-title">项目管理制度 V2.1</h3>
+                            <div class="document-meta">
+                                <span>项目管理办公室</span>
+                                <span>2024-01-25</span>
+                            </div>
+                            <p class="document-description">项目立项、执行、监控和收尾的全流程管理规范，适用于所有业务项目。</p>
+                            <div class="document-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-eye"></i> 预览
+                                </button>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i> 下载
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+
+                <!-- 热门文档 -->
+                <div class="popular-documents">
+                    <h2 class="section-title">热门文档</h2>
+                    <div class="documents-list">
+                        <div class="document-row">
+                            <div class="document-row-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="document-row-content">
+                                <div class="document-row-title">公司差旅费用报销政策</div>
+                                <div class="document-row-meta">财务管理部 · 2024-01-15 · 已浏览 342 次</div>
+                            </div>
+                            <div class="document-row-actions">
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="document-row">
+                            <div class="document-row-icon">
+                                <i class="fas fa-file-word"></i>
+                            </div>
+                            <div class="document-row-content">
+                                <div class="document-row-title">新员工入职指南</div>
+                                <div class="document-row-meta">人力资源部 · 2024-02-01 · 已浏览 298 次</div>
+                            </div>
+                            <div class="document-row-actions">
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="document-row">
+                            <div class="document-row-icon">
+                                <i class="fas fa-file-excel"></i>
+                            </div>
+                            <div class="document-row-content">
+                                <div class="document-row-title">月度绩效考核表</div>
+                                <div class="document-row-meta">人力资源部 · 2024-03-01 · 已浏览 276 次</div>
+                            </div>
+                            <div class="document-row-actions">
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="document-row">
+                            <div class="document-row-icon">
+                                <i class="fas fa-file-powerpoint"></i>
+                            </div>
+                            <div class="document-row-content">
+                                <div class="document-row-title">产品介绍与市场定位</div>
+                                <div class="document-row-meta">市场部 · 2024-02-18 · 已浏览 254 次</div>
+                            </div>
+                            <div class="document-row-actions">
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline" style="padding: 5px 10px; font-size: 0.8rem;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -598,29 +923,43 @@
     </footer>
 
     <script>
-        // 常见问题折叠功能
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentNode;
-                item.classList.toggle('active');
+        // 文档卡片点击事件
+        document.querySelectorAll('.document-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('.document-title').textContent;
+                alert(`您点击了文档: ${title}\n\n在实际应用中，这里会打开文档预览或下载对话框。`);
             });
         });
-
-        // 搜索功能（基础前端实现）
+        
+        // 搜索功能
         document.querySelector('.search-btn').addEventListener('click', function() {
             const searchTerm = document.querySelector('.search-box').value.trim();
             if (searchTerm) {
-                alert(`正在搜索: ${searchTerm}\n\n在实际应用中，这里会显示与"${searchTerm}"相关的搜索结果。`);
+                alert(`正在搜索: ${searchTerm}\n\n在实际应用中，这里会显示与"${searchTerm}"相关的文档搜索结果。`);
             } else {
                 alert('请输入搜索关键词');
             }
         });
-
-        // 分类卡片点击事件
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const categoryName = this.querySelector('h3').textContent;
-                alert(`您点击了"${categoryName}"分类\n\n在实际应用中，这里会跳转到该分类的详细页面。`);
+        
+        // 分类导航点击事件
+        document.querySelectorAll('.category-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const category = this.textContent;
+                alert(`您选择了分类: ${category}\n\n在实际应用中，这里会筛选显示该分类下的文档。`);
+                
+                // 更新活动状态
+                document.querySelectorAll('.category-list li').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.parentNode.classList.add('active');
+            });
+        });
+        
+        // 筛选条件变化
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', function() {
+                alert(`筛选条件已更新: ${this.value}\n\n在实际应用中，这里会根据筛选条件更新文档列表。`);
             });
         });
     </script>
